@@ -1,0 +1,36 @@
+# Pixl
+
+An interactive visualization of pixel shuffle (space-to-depth) as used in smolvlm for vision token compression.
+
+
+<p align="center">
+  <img src="image-1.png" alt="Pixel shuffle visualization view 1" height="260">
+  <img src="image-2.png" alt="Pixel shuffle visualization view 2" height="260">
+</p>
+
+
+
+Pixel unshuffle, or space-to-depth, reduces spatial resolution and increases channel depth:
+
+`(H * r) x (W * r) x C -> H x W x (C * r^2)`
+
+Start with an image grid.
+
+Choose a block size, like 2, 4, or 8.
+
+    For every small block of pixels:
+      Take the pixels in that block.
+      Keep the block's top-left position as the new spatial position.
+      Move each pixel inside the block into a different channel slot.
+
+So nearby pixels in image space become stacked values in channel depth.
+
+No pixel values are changed. Only their addresses are rearranged.
+We visualize this rearrangement as a 3D stack so the movement from image space into channel depth is easier to see.
+
+The reverse operation is pixel shuffle, or depth-to-space:
+
+`H x W x (C * r^2) -> (H * r) x (W * r) x C`
+
+
+
