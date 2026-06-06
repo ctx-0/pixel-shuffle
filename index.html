@@ -1,100 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Space-to-Depth Pixel Shuffle — Multi Image Corner Card</title>
-<link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-<div id="app">
-  <canvas id="scene"></canvas>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixel Shuffle</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="scene"></canvas>
 
-  <div class="figure-title">
-    <div class="eyebrow" id="figureEyebrow">space-to-depth · pixel unshuffle</div>
-    <div class="path">
-      <div class="title" id="figureTitle">Space-to-depth pixel shuffle</div>
-      <div class="step" data-path-index="0">64×64×1</div>
-      <div class="sep">→</div>
-      <div class="step" data-path-index="1">32×32×4</div>
-      <div class="sep">→</div>
-      <div class="step" data-path-index="2">16×16×16</div>
-      <div class="sep">→</div>
-      <div class="step" data-path-index="3">8×8×64</div>
-    </div>
-  </div>
-
-  <div class="camera-pop" id="cameraPopover">
-    <div class="camera-head">
-      <span>Camera</span>
-      <span id="camState">manual</span>
-    </div>
-    <div class="camera-rows">
-      <div class="camera-row">
-        <label for="yaw">Yaw</label>
-        <input id="yaw" type="range" min="-2.1" max="2.1" step="0.01" value="0.72">
-      </div>
-      <div class="camera-row">
-        <label for="pitch">Pitch</label>
-        <input id="pitch" type="range" min="-0.15" max="1.30" step="0.01" value="0.58">
-      </div>
-      <div class="camera-row">
-        <label for="zoom">Zoom</label>
-        <input id="zoom" type="range" min="0.65" max="1.85" step="0.01" value="1.05">
-      </div>
-      <div class="camera-row">
-        <label for="depth">Depth</label>
-        <input id="depth" type="range" min="0.80" max="2.30" step="0.01" value="1.45">
-      </div>
-    </div>
-  </div>
-
-  <div class="control-card" id="controlCard">
-    <div class="card-top">
-      <div class="meta">
-        <div class="label">Current mapping</div>
-        <div class="shape" id="shapeCopy">64×64×1 → 32×32×4</div>
-      </div>
-      <div class="actions">
-        <button id="playBtn" class="iconbtn" title="Play" aria-label="Play">▶</button>
-        <button id="resetBtn" class="iconbtn" title="Reset" aria-label="Reset">↺</button>
-        <button id="collapseBtn" class="iconbtn collapse-btn" title="Collapse controls" aria-label="Collapse controls" aria-expanded="true" aria-controls="controlCardBody">−</button>
-      </div>
-    </div>
-
-    <div class="control-card-body" id="controlCardBody">
-      <div class="segmented">
-        <button id="packBtn" class="active">Unshuffle</button>
-        <button id="unpackBtn">Shuffle</button>
-      </div>
-
-      <div class="preset-block">
-        <div class="preset-label">Image</div>
-        <div class="preset-strip" id="presetStrip"></div>
-      </div>
-
-      <div class="status" id="stageCopy">Space-to-depth Blue — original spatial image.</div>
-
-      <div class="scrub">
-        <div class="rail-wrap">
-          <div class="rail"></div>
-          <div class="fill" id="fill"></div>
-          <input id="progress" type="range" min="0" max="1" step="0.001" value="0" />
+      <div class="figure-title">
+        <div class="eyebrow" id="figureEyebrow">
+          space-to-depth · pixel unshuffle
         </div>
-        <div class="stage-dots" id="stageNodes"></div>
-      </div>
-
-      <div class="card-bottom">
-        <div class="tiny-pill" id="modePill">pack · manual</div>
-        <div class="right">
-          <button id="orbitBtn">Orbit</button>
-          <button id="cameraBtn">Camera</button>
+        <div class="path">
+          <div class="title" id="figureTitle">Space-to-depth pixel shuffle</div>
+          <div class="step" data-path-index="0">64×64×1</div>
+          <div class="sep">→</div>
+          <div class="step" data-path-index="1">32×32×4</div>
+          <div class="sep">→</div>
+          <div class="step" data-path-index="2">16×16×16</div>
+          <div class="sep">→</div>
+          <div class="step" data-path-index="3">8×8×64</div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<script src="app.js"></script>
-</body>
+      <div class="camera-pop" id="cameraPopover">
+        <div class="camera-head">
+          <span>Camera</span>
+          <span id="camState">manual</span>
+        </div>
+        <div class="camera-rows">
+          <div class="camera-row">
+            <label for="yaw">Yaw</label>
+            <input
+              id="yaw"
+              type="range"
+              min="-2.1"
+              max="2.1"
+              step="0.01"
+              value="0.72"
+            />
+          </div>
+          <div class="camera-row">
+            <label for="pitch">Pitch</label>
+            <input
+              id="pitch"
+              type="range"
+              min="-0.15"
+              max="1.30"
+              step="0.01"
+              value="0.58"
+            />
+          </div>
+          <div class="camera-row">
+            <label for="zoom">Zoom</label>
+            <input
+              id="zoom"
+              type="range"
+              min="0.65"
+              max="1.85"
+              step="0.01"
+              value="1.05"
+            />
+          </div>
+          <div class="camera-row">
+            <label for="depth">Depth</label>
+            <input
+              id="depth"
+              type="range"
+              min="0.80"
+              max="2.30"
+              step="0.01"
+              value="1.45"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="control-card" id="controlCard">
+        <div class="card-top">
+          <div class="meta">
+            <div class="label">Current mapping</div>
+            <div class="shape" id="shapeCopy">64×64×1 → 32×32×4</div>
+          </div>
+          <div class="actions">
+            <button id="playBtn" class="iconbtn" title="Play" aria-label="Play">
+              ▶
+            </button>
+            <button
+              id="resetBtn"
+              class="iconbtn"
+              title="Reset"
+              aria-label="Reset"
+            >
+              ↺
+            </button>
+            <button
+              id="collapseBtn"
+              class="iconbtn collapse-btn"
+              title="Collapse controls"
+              aria-label="Collapse controls"
+              aria-expanded="true"
+              aria-controls="controlCardBody"
+            >
+              −
+            </button>
+          </div>
+        </div>
+
+        <div class="control-card-body" id="controlCardBody">
+          <div class="segmented">
+            <button id="packBtn" class="active">Unshuffle</button>
+            <button id="unpackBtn">Shuffle</button>
+          </div>
+
+          <div class="preset-block">
+            <div class="preset-label">Image</div>
+            <div class="preset-strip" id="presetStrip"></div>
+          </div>
+
+          <div class="status" id="stageCopy">
+            Space-to-depth Blue — original spatial image.
+          </div>
+
+          <div class="scrub">
+            <div class="rail-wrap">
+              <div class="rail"></div>
+              <div class="fill" id="fill"></div>
+              <input
+                id="progress"
+                type="range"
+                min="0"
+                max="1"
+                step="0.001"
+                value="0"
+              />
+            </div>
+            <div class="stage-dots" id="stageNodes"></div>
+          </div>
+
+          <div class="card-bottom">
+            <div class="tiny-pill" id="modePill">pack · manual</div>
+            <div class="right">
+              <button id="orbitBtn">Orbit</button>
+              <button id="cameraBtn">Camera</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
 </html>
