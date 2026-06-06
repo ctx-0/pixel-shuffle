@@ -8,7 +8,7 @@ An interactive visualization of pixel shuffle (space-to-depth) as used in smolvl
   <img src="image-2.png" alt="Pixel shuffle visualization view 2" height="260">
 </p>
 
-
+**Live**: https://ctx-0.github.io/pixel-shuffle/
 
 Pixel unshuffle, or space-to-depth, reduces spatial resolution and increases channel depth:
 
