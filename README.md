@@ -32,5 +32,10 @@ The reverse operation is pixel shuffle, or depth-to-space:
 
 `H x W x (C * r^2) -> (H * r) x (W * r) x C`
 
+## Presets
+
+Preset images live in `presets/` as lossless `64x64` RGBA PNGs. Transparent pixels are omitted from the visualization; visible pixels must be fully opaque.
+
+Add a PNG to `presets/`, then add its label and path to `PRESET_MANIFEST` in `app.js`. All preset images are preloaded and decoded before the animation starts.
 
 
