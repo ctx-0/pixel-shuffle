@@ -42,11 +42,11 @@ const PRESET_MANIFEST = {
     "src": "presets/taco.png"
   },
   "blue": {
-    "label": "Blue",
+    "label": "Baka",
     "src": "presets/blue.png"
   },
   "red": {
-    "label": "Red Bow",
+    "label": "Reimu",
     "src": "presets/red.png"
   }
 };
