@@ -51,7 +51,7 @@
     position:absolute; right:20px; bottom:20px; width:320px; max-width:calc(100vw - 32px);
     padding:12px; border-radius:22px; background:var(--panel); border:1px solid var(--line-strong);
     backdrop-filter:blur(16px); box-shadow:0 22px 70px rgba(0,0,0,.34);
-    max-height:calc(100dvh - 40px); display:flex; flex-direction:column;
+    max-height:calc(100vh - 40px); max-height:calc(100dvh - 40px); display:flex; flex-direction:column;
   }
   .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-shrink:0;}
   .control-card-body{
@@ -141,19 +141,21 @@
     .figure-title .path::-webkit-scrollbar{display:none}
     .control-card{
       right:max(12px, env(safe-area-inset-right)); bottom:max(12px, env(safe-area-inset-bottom));
-      left:max(12px, env(safe-area-inset-left)); width:auto; max-width:none; max-height:calc(100dvh - 96px);
+      left:max(12px, env(safe-area-inset-left)); width:auto; max-width:none;
+      max-height:calc(100vh - 96px); max-height:calc(100dvh - 96px);
       padding:8px; border-radius:16px;
     }
     .control-card.collapsed{
-      right:auto; left:50%; width:min(280px, calc(100vw - 24px));
-      transform:translateX(-50%);
+      right:max(12px, env(safe-area-inset-right)); left:max(12px, env(safe-area-inset-left));
+      width:min(280px, calc(100vw - 24px)); margin-inline:auto; transform:none;
       padding:7px 8px;
     }
     .control-card.collapsed .meta .label{display:none;}
     .control-card-body{margin-top:6px; padding-right:2px;}
     .camera-pop{
       right:max(12px, env(safe-area-inset-right)); left:max(12px, env(safe-area-inset-left));
-      top:76px; bottom:auto; width:auto; max-width:none; max-height:calc(100dvh - 164px); overflow-y:auto;
+      top:76px; bottom:auto; width:auto; max-width:none;
+      max-height:calc(100vh - 164px); max-height:calc(100dvh - 164px); overflow-y:auto;
     }
     .meta .shape{max-width:none}
     .meta .label{font-size:9px;}
